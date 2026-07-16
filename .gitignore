@@ -1,0 +1,37 @@
+# Environment files
+.env
+.env.backup
+.env.production
+
+# Docker volumes
+db_data/
+
+# IDE
+.idea/
+.vscode/
+.cursor/
+.nova/
+.zed/
+.codex/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Laravel specific (in src directory)
+src/.env
+src/.env.backup
+src/.env.production
+src/node_modules
+src/vendor
+src/storage/*.key
+src/storage/pail
+src/public/build
+src/public/fonts-manifest.dev.json
+src/public/hot
+src/public/storage
+src/.phpunit.cache
+src/.phpunit.result.cache
