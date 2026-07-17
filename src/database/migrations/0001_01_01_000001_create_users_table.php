@@ -14,9 +14,31 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('contact_phone')->nullable();
+
+            $table->date('dob')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->string('avatar')->nullable();
+
+            $table->unsignedTinyInteger('role')->default(0);
+            $table->foreignId('venue_id')
+                ->nullable()->
+                constrained()->
+                nullOnDelete();
+            $table->decimal('balance', 10,2)
+                ->default(0.00);
+
+            $table->string('personal_slug')
+                ->nullable()
+                ->unique();
+
             $table->rememberToken();
             $table->timestamps();
         });
