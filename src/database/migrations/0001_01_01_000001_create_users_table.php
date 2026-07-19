@@ -27,17 +27,16 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->string('avatar')->nullable();
 
-            $table->unsignedTinyInteger('role')->default(0);
-            $table->foreignId('venue_id')
-                ->nullable()->
-                constrained()->
-                nullOnDelete();
+            $table->enum('role', ['employee', 'manager', 'admin'])
+                ->default('employee');
             $table->decimal('balance', 10,2)
                 ->default(0.00);
 
             $table->string('personal_slug')
                 ->nullable()
                 ->unique();
+
+            $table->boolean('is_active')->default(true);
 
             $table->rememberToken();
             $table->timestamps();

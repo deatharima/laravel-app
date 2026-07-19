@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Venues\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
-use Filament\Forms\Components\FileUpload;
 
 class VenueForm
 {

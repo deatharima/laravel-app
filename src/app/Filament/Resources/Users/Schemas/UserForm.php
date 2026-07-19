@@ -2,15 +2,12 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Tables\Columns\SelectColumn;
 
 class UserForm
 {
@@ -28,6 +25,14 @@ class UserForm
                         TextInput::make('password')
                             ->password()
                             ->revealable(),
+                        Select::make('role')
+                            ->options([
+                                'employee' => 'Employee',
+                                'manager' => 'Manager',
+                                'admin' => 'Admin',
+                            ])
+                            ->default('employee')
+                            ->required(),
                         ])
                         ->columns(2),
 
@@ -46,7 +51,10 @@ class UserForm
                             )
                         ),
 
-                        Radio::make('gender') ->options(['Male', 'Female'])
+                        Radio::make('gender') ->options([
+                            'male' => 'Male',
+                            'female' => 'Female',
+                        ])
                             ->inline()
                             ->inlineLabel(false),
                         ])

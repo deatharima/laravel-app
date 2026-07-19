@@ -13,7 +13,6 @@ use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class UserResource extends Resource
@@ -58,5 +57,10 @@ class UserResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+    public static function canViewAny(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->role === 'admin';
     }
 }

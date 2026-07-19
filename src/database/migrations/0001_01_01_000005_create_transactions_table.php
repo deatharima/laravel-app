@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('payment_provider');
             $table->string('payment_id')->unique();
 
+            $table->string('device_uuid')->nullable()->index();
+
             $table->timestamps();
 
             $table->index('status'); // индексы для удобного поиска в базе

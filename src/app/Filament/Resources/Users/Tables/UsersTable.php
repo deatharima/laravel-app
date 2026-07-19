@@ -24,10 +24,12 @@ class UsersTable
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('role')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('venue_id')
-                    ->numeric()
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'admin' => 'danger',
+                        'manager' => 'warning',
+                        'employee' => 'success',
+                    })
                     ->sortable(),
                 TextColumn::make('balance')
                     ->numeric()

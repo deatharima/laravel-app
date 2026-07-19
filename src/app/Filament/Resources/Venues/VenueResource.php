@@ -11,7 +11,6 @@ use App\Models\Venue;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class VenueResource extends Resource
@@ -35,7 +34,7 @@ class VenueResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            \App\Filament\Resources\Venues\RelationManagers\UsersRelationManager::class,
         ];
     }
 
@@ -51,5 +50,11 @@ class VenueResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function canViewAny(): bool
+    {
+        $user = auth()->user();
+        return $user && $user->role === 'admin';
     }
 }
