@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\Payouts;
+namespace App\Filament\Manager\Resources\Payouts;
 
-use App\Filament\Resources\Payouts\Pages\CreatePayout;
-use App\Filament\Resources\Payouts\Pages\EditPayout;
-use App\Filament\Resources\Payouts\Pages\ListPayouts;
-use App\Filament\Resources\Payouts\Pages\ViewPayout;
-use App\Filament\Resources\Payouts\Schemas\PayoutForm;
-use App\Filament\Resources\Payouts\Schemas\PayoutInfolist;
-use App\Filament\Resources\Payouts\Tables\PayoutsTable;
+use App\Filament\Manager\Resources\Payouts\Pages\CreatePayout;
+use App\Filament\Manager\Resources\Payouts\Pages\EditPayout;
+use App\Filament\Manager\Resources\Payouts\Pages\ListPayouts;
+use App\Filament\Manager\Resources\Payouts\Pages\ViewPayout;
+use App\Filament\Manager\Resources\Payouts\Schemas\PayoutForm;
+use App\Filament\Manager\Resources\Payouts\Schemas\PayoutInfolist;
+use App\Filament\Manager\Resources\Payouts\Tables\PayoutsTable;
 use App\Models\Payout;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class PayoutResource extends Resource
 {
     protected static ?string $model = Payout::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-currency-dollar';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -53,15 +54,5 @@ class PayoutResource extends Resource
             'view' => ViewPayout::route('/{record}'),
             'edit' => EditPayout::route('/{record}/edit'),
         ];
-    }
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-
-    public static function canViewAny(): bool
-    {
-        $user = auth()->user();
-        return $user && $user->role === 'admin';
     }
 }

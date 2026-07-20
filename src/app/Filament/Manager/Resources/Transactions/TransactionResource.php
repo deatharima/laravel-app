@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\Transactions;
+namespace App\Filament\Manager\Resources\Transactions;
 
-use App\Filament\Resources\Transactions\Pages\CreateTransaction;
-use App\Filament\Resources\Transactions\Pages\EditTransaction;
-use App\Filament\Resources\Transactions\Pages\ListTransactions;
-use App\Filament\Resources\Transactions\Pages\ViewTransaction;
-use App\Filament\Resources\Transactions\Schemas\TransactionForm;
-use App\Filament\Resources\Transactions\Schemas\TransactionInfolist;
-use App\Filament\Resources\Transactions\Tables\TransactionsTable;
+use App\Filament\Manager\Resources\Transactions\Pages\CreateTransaction;
+use App\Filament\Manager\Resources\Transactions\Pages\EditTransaction;
+use App\Filament\Manager\Resources\Transactions\Pages\ListTransactions;
+use App\Filament\Manager\Resources\Transactions\Pages\ViewTransaction;
+use App\Filament\Manager\Resources\Transactions\Schemas\TransactionForm;
+use App\Filament\Manager\Resources\Transactions\Schemas\TransactionInfolist;
+use App\Filament\Manager\Resources\Transactions\Tables\TransactionsTable;
 use App\Models\Transaction;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-credit-card';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -53,15 +54,5 @@ class TransactionResource extends Resource
             'view' => ViewTransaction::route('/{record}'),
             'edit' => EditTransaction::route('/{record}/edit'),
         ];
-    }
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-
-    public static function canViewAny(): bool
-    {
-        $user = auth()->user();
-        return $user && $user->role === 'admin';
     }
 }

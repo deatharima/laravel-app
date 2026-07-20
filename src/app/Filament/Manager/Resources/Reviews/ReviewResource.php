@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\Reviews;
+namespace App\Filament\Manager\Resources\Reviews;
 
-use App\Filament\Resources\Reviews\Pages\CreateReview;
-use App\Filament\Resources\Reviews\Pages\EditReview;
-use App\Filament\Resources\Reviews\Pages\ListReviews;
-use App\Filament\Resources\Reviews\Pages\ViewReview;
-use App\Filament\Resources\Reviews\Schemas\ReviewForm;
-use App\Filament\Resources\Reviews\Schemas\ReviewInfolist;
-use App\Filament\Resources\Reviews\Tables\ReviewsTable;
+use App\Filament\Manager\Resources\Reviews\Pages\CreateReview;
+use App\Filament\Manager\Resources\Reviews\Pages\EditReview;
+use App\Filament\Manager\Resources\Reviews\Pages\ListReviews;
+use App\Filament\Manager\Resources\Reviews\Pages\ViewReview;
+use App\Filament\Manager\Resources\Reviews\Schemas\ReviewForm;
+use App\Filament\Manager\Resources\Reviews\Schemas\ReviewInfolist;
+use App\Filament\Manager\Resources\Reviews\Tables\ReviewsTable;
 use App\Models\Review;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-chat-bubble-oval-left-ellipsis';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -53,15 +54,5 @@ class ReviewResource extends Resource
             'view' => ViewReview::route('/{record}'),
             'edit' => EditReview::route('/{record}/edit'),
         ];
-    }
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-
-    public static function canViewAny(): bool
-    {
-        $user = auth()->user();
-        return $user && $user->role === 'admin';
     }
 }
